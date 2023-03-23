@@ -139,6 +139,14 @@ renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 renderer.shadowMap.enabled = true
 
+// 鼠标的位置对象
+let mouseX = 0
+
+// 监听鼠标的位置
+window.addEventListener('mousemove', (event) => {
+  console.log(mouseX)
+  mouseX = event.clientX / window.innerWidth - 0.5
+})
 const clock = new THREE.Clock()
 // 动画
 gsap.to(cubeGroup.rotation, {
@@ -157,6 +165,7 @@ gsap.to(triangleGroup.rotation, {
 })
 const renderFunction = () => {
   const time = clock.getElapsedTime()
+
   // cubeGroup.rotation.x = time * 0.5
   // cubeGroup.rotation.y = time * 0.3
   // triangleGroup.rotation.x = time * 0.5
@@ -167,6 +176,7 @@ const renderFunction = () => {
   ballGroup.rotation.x = Math.sin(time) * 0.04
   ballGroup.rotation.z = Math.sin(time) * 0.04
   camera.position.y = (-window.scrollY / window.innerHeight) * 30
+  camera.position.x += mouseX * 10 - camera.position.x
   renderer.render(scene, camera)
   requestAnimationFrame(renderFunction)
 }
@@ -191,7 +201,6 @@ window.addEventListener('scroll', () => {
           z: `+=${Math.PI}`,
           duration: 2,
         })
-
         break
       case 1:
         gsap.to(triangleGroup.rotation, {
@@ -202,5 +211,25 @@ window.addEventListener('scroll', () => {
       default:
         break
     }
+    gsap.fromTo(
+      `.page${currentPage} h1`,
+      {
+        transform: 'scale(0.1)',
+      },
+      {
+        transform: 'scale(1)',
+        duration: 1,
+      }
+    )
+    gsap.fromTo(
+      `.page${currentPage} h3`,
+      {
+        opacity: 0.1,
+      },
+      {
+        opacity: 1,
+        duration: 3,
+      }
+    )
   }
 })
