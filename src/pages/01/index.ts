@@ -49,15 +49,20 @@ const guiObject = {
 }
 gui.add(guiObject, 'fullScreenClick').name('全屏切换')
 const folder = gui.addFolder('设置立方体')
-folder.add(cube.position, 'x').min(0).max(5).step(0.01).name('x轴')
+folder
+  .add(cube.position as any, 'x')
+  .min(0)
+  .max(5)
+  .step(0.01)
+  .name('x轴')
 folder
   .addColor(guiObject, 'color')
-  .onChange((value) => {
+  .onChange((value: string) => {
     cube.material.color.set(value)
   })
   .name('颜色')
-folder.add(cube.material, 'wireframe').name('网格')
-folder.add(cube, 'visible').name('是否显示')
+folder.add(cube.material as any, 'wireframe').name('网格')
+folder.add(cube as any, 'visible').name('是否显示')
 // 动画
 const renderFunction = () => {
   controls.update()

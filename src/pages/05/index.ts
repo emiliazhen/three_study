@@ -85,7 +85,7 @@ scene.add(axesHelper)
 // 设置gui
 const gui = new dat.GUI()
 gui
-  .add(directionalLight.shadow.camera, 'near')
+  .add(directionalLight.shadow.camera as any, 'near')
   .min(0)
   .max(20)
   .onChange(() => {
