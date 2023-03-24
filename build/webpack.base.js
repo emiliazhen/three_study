@@ -52,6 +52,7 @@ module.exports = {
       // 处理html中img资源
       {
         test: /.\html$/,
+        exclude: /node_modules/,
         use: {
           loader: 'html-loader',
           options: {
@@ -61,6 +62,7 @@ module.exports = {
       },
       {
         test: /\.(png|gif|bmp|jpg)$/,
+        exclude: /node_modules/,
         use: {
           loader: 'url-loader',
           options: {
@@ -83,12 +85,19 @@ module.exports = {
       // },
       {
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        exclude: /node_modules/,
         type: 'asset/inline',
       },
       {
         test: /\.(hdr|mp3)$/,
+        exclude: /node_modules/,
         type: 'asset/resource',
       },
+      // {
+      //   test: /\.(glsl)$/,
+      //   exclude: /node_modules/,
+      //   loader: 'ts-shader-loader',
+      // },
     ],
   },
   //这里就是一些插件

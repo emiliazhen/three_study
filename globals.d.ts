@@ -15,3 +15,7 @@ declare module '*.mp3' {
   const value: any
   export = value
 }
+declare module '*.glsl' {
+  const value: string
+  export = value
+}
