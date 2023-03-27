@@ -3,43 +3,30 @@ import './index.scss'
 import * as THREE from 'three'
 // 导入轨道控制器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-// import baseVertexShader from '@/assets/shader/base/vertex.glsl'
-// import baseFragmentShader from '@/assets/shader/base/fragment.glsl'
-import rawVertexShader from '@/assets/shader/base/vertex_raw.glsl'
-import rawFragmentShader from '@/assets/shader/base/fragment_raw.glsl'
-import paralympicGames from '@/assets/texture/paralympic_games.jpeg'
+import rawVertexShader from '@/assets/shader/base/vertex_raw_14.glsl'
+import rawFragmentShader from '@/assets/shader/base/fragment_raw_14.glsl'
 
 document.title = '13 着色器'
 
 // 创建场景
 const scene = new THREE.Scene()
 // 创建相机
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100)
 // 设置相机位置
 camera.position.set(0, 0, 1)
 scene.add(camera)
 
-// 创建纹理加载器对象
-const textureLoader = new THREE.TextureLoader()
-const texture = textureLoader.load(paralympicGames)
 // 创建平面
 const planeGeometry = new THREE.PlaneGeometry(1, 1, 32, 32)
-// 着色器材质
-// const planeRawShaderMaterial = new THREE.ShaderMaterial({
-//   vertexShader: baseVertexShader,
-//   fragmentShader: baseFragmentShader,
-// })
 // ! 原始着色器材质
 const planeRawShaderMaterial = new THREE.RawShaderMaterial({
   vertexShader: rawVertexShader,
   fragmentShader: rawFragmentShader,
   side: THREE.DoubleSide,
+  transparent: true,
   uniforms: {
     uTime: {
       value: 0,
-    },
-    uTexture: {
-      value: texture,
     },
   },
 })

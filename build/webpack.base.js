@@ -61,7 +61,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|gif|bmp|jpg)$/,
+        test: /\.(png|gif|bmp|jpe?g)$/,
         exclude: /node_modules/,
         use: {
           loader: 'url-loader',
@@ -84,7 +84,7 @@ module.exports = {
       //   options: { outputPath: 'media' },
       // },
       {
-        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        test: /\.(woff(2)?|eot|ttf|otf|svg)$/,
         exclude: /node_modules/,
         type: 'asset/inline',
       },
@@ -93,11 +93,11 @@ module.exports = {
         exclude: /node_modules/,
         type: 'asset/resource',
       },
-      // {
-      //   test: /\.(glsl)$/,
-      //   exclude: /node_modules/,
-      //   loader: 'ts-shader-loader',
-      // },
+      {
+        test: /\.(glsl)$/,
+        exclude: /node_modules/,
+        loader: 'raw-loader',
+      },
     ],
   },
   //这里就是一些插件
