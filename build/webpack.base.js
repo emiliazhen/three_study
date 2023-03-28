@@ -89,7 +89,7 @@ module.exports = {
         type: 'asset/inline',
       },
       {
-        test: /\.(hdr|mp3)$/,
+        test: /\.(hdr|mp3|glb)$/,
         exclude: /node_modules/,
         type: 'asset/resource',
       },
