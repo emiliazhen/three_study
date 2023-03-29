@@ -1,7 +1,7 @@
 import '@/assets/styles/index.scss'
 import './index.scss'
 import * as THREE from 'three'
-
+import gasp from 'gsap'
 import rawVertexShader from '@/assets/shader/lantern/vertex.glsl'
 import rawFragmentShader from '@/assets/shader/lantern/fragment.glsl'
 import lanternModel from '@/assets/model/lantern.glb'
@@ -34,19 +34,35 @@ const rawShaderMaterial = new THREE.RawShaderMaterial({
   vertexShader: rawVertexShader,
   fragmentShader: rawFragmentShader,
   side: THREE.DoubleSide,
-  transparent: true,
-  uniforms: {
-    uTime: {
-      value: 0,
-    },
-  },
+  // ! 影响正反面片元着色
+  // transparent: true,
 })
 
+// ! GLTF读取
 const gltfLoader = new GLTFLoader()
 gltfLoader.load(lanternModel, (gltf) => {
-  console.log(gltf)
-  ;(gltf.scene.children[0] as any).material = rawShaderMaterial
-  scene.add(gltf.scene)
+  const lanternWrap = gltf.scene.children[0] as THREE.Mesh
+  lanternWrap.material = rawShaderMaterial
+  for (let index = 0; index < 150; index++) {
+    const currentLantern = gltf.scene.clone(true)
+    const x = (Math.random() - 0.5) * 300
+    const z = (Math.random() - 0.5) * 300
+    const y = Math.random() * 60 + 25
+    currentLantern.position.set(x, y, z)
+    gasp.to(currentLantern.rotation, {
+      y: 2 * Math.PI,
+      duration: 10 + Math.random() * 30,
+      repeat: -1,
+    })
+    gasp.to(currentLantern.position, {
+      x: `+=${Math.random() * 5}`,
+      y: `+=${Math.random() * 10}`,
+      duration: 5 + Math.random() * 10,
+      repeat: -1,
+      yoyo: true,
+    })
+    scene.add(currentLantern)
+  }
 })
 // 初始化渲染器
 const renderer = new THREE.WebGLRenderer()
@@ -55,21 +71,21 @@ renderer.outputEncoding = THREE.sRGBEncoding
 // ! 色调映射
 renderer.toneMapping = THREE.ACESFilmicToneMapping
 // ! 曝光度
-renderer.toneMappingExposure = 0.2
+renderer.toneMappingExposure = 0.15
 // 设置渲染尺寸
 renderer.setSize(window.innerWidth, window.innerHeight)
 // 将webgl渲染的canvas内容添加到body
 document.body.appendChild(renderer.domElement)
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.enableDamping = true
-
-const axesHelper = new THREE.AxesHelper()
-scene.add(axesHelper)
+// 自动旋转
+controls.autoRotate = true
+controls.autoRotateSpeed = 0.1
+controls.maxPolarAngle = (Math.PI / 4) * 3
+controls.minPolarAngle = (Math.PI / 4) * 3
 
 // 动画
-const clock = new THREE.Clock()
 const renderFunction = () => {
-  // planeRawShaderMaterial.uniforms.uTime.value = clock.getElapsedTime()
   controls.update()
   renderer.render(scene, camera)
   requestAnimationFrame(renderFunction)
