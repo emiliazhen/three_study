@@ -7,7 +7,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
 import textureHDR from '@/assets/texture/orbital.hdr'
-document.title = '08 星系'
+
+document.title = `${window.location.pathname.slice(1)} 星系`
 
 // 创建场景
 const scene = new THREE.Scene()

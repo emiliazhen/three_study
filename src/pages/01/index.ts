@@ -5,7 +5,7 @@ import * as THREE from 'three'
 // 导入轨道控制器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-document.title = '01 简单几何体'
+document.title = `${window.location.pathname.slice(1)} 简单几何体`
 
 // 创建场景
 const scene = new THREE.Scene()

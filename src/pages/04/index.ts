@@ -18,7 +18,8 @@ import imgFactoryWallNor from '@/assets/texture/factory_wall_nor_gl.jpg'
 // import imgPY from '@/assets/texture/posy.jpg'
 // import imgPZ from '@/assets/texture/posz.jpg'
 import textureHDR from '@/assets/texture/neon_photostudio.hdr'
-document.title = '04 贴图'
+
+document.title = `${window.location.pathname.slice(1)} 贴图`
 
 // 创建场景
 const scene = new THREE.Scene()

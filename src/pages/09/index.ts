@@ -1,11 +1,10 @@
 import '@/assets/styles/index.scss'
 import './index.scss'
-import * as dat from 'dat.gui'
 import * as THREE from 'three'
 // 导入轨道控制器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-document.title = '09 交互'
+document.title = `${window.location.pathname.slice(1)} 交互`
 
 // 创建场景
 const scene = new THREE.Scene()
@@ -43,11 +42,11 @@ window.addEventListener('click', (event) => {
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1
   mouse.y = -((event.clientY / window.innerHeight) * 2 - 1)
   raycaster.setFromCamera(mouse, camera)
-  const result = raycaster.intersectObjects(cubeArr)
+  const result = raycaster.intersectObjects(cubeArr) as { object: THREE.Mesh }[]
   //   console.log(result);
   //   result[0].object.material = redMaterial;
   result.forEach((item) => {
-    ;(item.object as any).material = cubeRedMaterial
+    item.object.material = cubeRedMaterial
   })
 })
 

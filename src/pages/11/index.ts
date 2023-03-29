@@ -2,9 +2,10 @@ import '@/assets/styles/index.scss'
 import './index.scss'
 import * as THREE from 'three'
 import * as CANNON from 'cannon-es'
-document.title = '11 物理引擎'
 import hitMetalVoice from '@/assets/audio/hit-metal.mp3'
 import hitSwordVoice from '@/assets/audio/hit-sword.mp3'
+document.title = `${window.location.pathname.slice(1)} 物理引擎`
+
 // 创建击打声音
 const hitMetalAudio = new Audio(hitMetalVoice)
 const hitSwordAudio = new Audio(hitSwordVoice)

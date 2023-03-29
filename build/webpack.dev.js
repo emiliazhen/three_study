@@ -31,6 +31,15 @@ const devConfig = {
     //   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
     //   'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
     // },
+    // 应对返回404页面时定向到特定页面
+    historyApiFallback: {
+      rewrites: [
+        {
+          from: /./,
+          to: '/404',
+        },
+      ],
+    },
   },
   module: {
     rules: [

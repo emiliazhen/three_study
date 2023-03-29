@@ -6,7 +6,7 @@ import particlesStar from '@/assets/texture/particles_star.png'
 // 导入轨道控制器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-document.title = '06 点'
+document.title = `${window.location.pathname.slice(1)} 点`
 
 // 创建场景
 const scene = new THREE.Scene()

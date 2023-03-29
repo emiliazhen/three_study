@@ -6,7 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import rawVertexShader from '@/assets/shader/base/vertex_raw_14.glsl'
 import rawFragmentShader from '@/assets/shader/base/fragment_raw_14.glsl'
 
-document.title = '14 着色器绘制图案'
+document.title = `${window.location.pathname.slice(1)} 着色器绘制图案`
 
 // 创建场景
 const scene = new THREE.Scene()

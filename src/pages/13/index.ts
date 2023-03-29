@@ -9,7 +9,7 @@ import rawVertexShader from '@/assets/shader/base/vertex_raw.glsl'
 import rawFragmentShader from '@/assets/shader/base/fragment_raw.glsl'
 import paralympicGames from '@/assets/texture/paralympic_games.jpeg'
 
-document.title = '13 着色器绘制旗帜'
+document.title = `${window.location.pathname.slice(1)} 着色器绘制旗帜`
 
 // 创建场景
 const scene = new THREE.Scene()

@@ -3,7 +3,7 @@ import './index.scss'
 import * as THREE from 'three'
 import particlesSnow from '@/assets/texture/particles_snow.png'
 
-document.title = '06 下雪'
+document.title = `${window.location.pathname.slice(1)} 下雪`
 
 // 创建场景
 const scene = new THREE.Scene()

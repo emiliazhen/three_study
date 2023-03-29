@@ -6,7 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 // import imgMaterialDoor from '@/assets/texture/material_door.jpg'
 import imgCubeMinecraft from '@/assets/texture/img_cube_minecraft.png'
 
-document.title = '03 材质'
+document.title = `${window.location.pathname.slice(1)} 材质`
 
 // 创建场景
 const scene = new THREE.Scene()

@@ -1,7 +1,6 @@
 import '@/assets/styles/index.scss'
 import './index.scss'
-
-document.title = '12 WebGL绘制三角形'
+document.title = `${window.location.pathname.slice(1)} WebGL绘制三角形`
 
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
 // canvas 宽高

@@ -12,7 +12,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
-document.title = '15 着色器绘制孔明灯'
+document.title = `${window.location.pathname.slice(1)} 着色器绘制孔明灯`
 
 // 创建场景
 const scene = new THREE.Scene()

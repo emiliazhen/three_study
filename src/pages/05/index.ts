@@ -4,7 +4,7 @@ import * as dat from 'dat.gui'
 // 导入轨道控制器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-document.title = '05 光照'
+document.title = `${window.location.pathname.slice(1)} 光照`
 
 // 创建场景
 const scene = new THREE.Scene()

@@ -17,6 +17,7 @@ const routerNameList = [
   '着色器绘制旗帜',
   '着色器绘制图案',
   '着色器绘制孔明灯',
+  '水波纹',
 ]
 routerNameList.forEach((routerName, index) => {
   const liElement = document.createElement('li')
@@ -30,4 +31,6 @@ routerNameList.forEach((routerName, index) => {
   })
   ulElement?.appendChild(liElement)
 })
-document.title = 'three-demo 主页'
+const saveSvgElement = document.getElementById('saveSvg')
+saveSvgElement?.addEventListener('click', () => (window.location.href = '/404'))
+document.title = 'Three-Demo 主页'
