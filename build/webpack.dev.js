@@ -40,6 +40,7 @@ const devConfig = {
         },
       ],
     },
+    static: './static',
   },
   module: {
     rules: [

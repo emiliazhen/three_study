@@ -25,6 +25,10 @@ const params = {
   xzScale: 1,
   lowColor: '#3077e5',
   highColor: '#63aee5',
+  xSpeed: 1,
+  zSpeed: 1,
+  noiseSpeed: 1,
+  opacity: 1,
 }
 // 创建平面
 const planeGeometry = new THREE.PlaneGeometry(1, 1, 512, 512)
@@ -58,6 +62,18 @@ const planeRawShaderMaterial = new THREE.ShaderMaterial({
     },
     uHighColor: {
       value: new THREE.Color(params.highColor),
+    },
+    uXSpeed: {
+      value: params.xSpeed,
+    },
+    uZSpeed: {
+      value: params.zSpeed,
+    },
+    uNoiseSpeed: {
+      value: params.noiseSpeed,
+    },
+    uOpacity: {
+      value: params.opacity,
     },
   },
 })
@@ -137,6 +153,42 @@ gui
   .name('亮色')
   .onFinishChange((value) => {
     planeRawShaderMaterial.uniforms.uHighColor.value = new THREE.Color(value)
+  })
+gui
+  .add(params, 'xSpeed')
+  .min(0.05)
+  .max(5)
+  .step(0.05)
+  .name('X速度')
+  .onChange((value) => {
+    planeRawShaderMaterial.uniforms.uXSpeed.value = value
+  })
+gui
+  .add(params, 'zSpeed')
+  .min(0.05)
+  .max(5)
+  .step(0.05)
+  .name('Z速度')
+  .onChange((value) => {
+    planeRawShaderMaterial.uniforms.uZSpeed.value = value
+  })
+gui
+  .add(params, 'noiseSpeed')
+  .min(0.05)
+  .max(5)
+  .step(0.05)
+  .name('噪声速度')
+  .onChange((value) => {
+    planeRawShaderMaterial.uniforms.uNoiseSpeed.value = value
+  })
+gui
+  .add(params, 'opacity')
+  .min(0.05)
+  .max(1)
+  .step(0.05)
+  .name('透明度')
+  .onChange((value) => {
+    planeRawShaderMaterial.uniforms.uOpacity.value = value
   })
 // 动画
 const clock = new THREE.Clock()

@@ -18,6 +18,7 @@ const routerNameList = [
   '着色器绘制图案',
   '着色器绘制孔明灯',
   '水波纹',
+  '浴缸',
 ]
 routerNameList.forEach((routerName, index) => {
   const liElement = document.createElement('li')

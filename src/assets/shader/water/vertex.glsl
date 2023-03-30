@@ -6,7 +6,11 @@ uniform float uNoiseFrequency;
 uniform float uNoiseScale;
 uniform float uXzScale;
 uniform float uTime;
+uniform float uXSpeed;
+uniform float uZSpeed;
+uniform float uNoiseSpeed;
 
+// 波动值传给片元着色器
 varying float vElevation;
 
 // 随机
@@ -81,9 +85,12 @@ float cnoise(vec2 P)
 
 void main(){
   vec4 modelPosition = modelMatrix * vec4( position, 1.0 );
-  float elevation = sin(modelPosition.x * uWaterFrequency ) * sin(modelPosition.z * uWaterFrequency * uXzScale) - abs(cnoise(modelPosition.xz * uNoiseFrequency + uTime) * uNoiseScale);
+  // 给Y方向波动值
+  float elevation = sin(modelPosition.x * uWaterFrequency + uTime * uXSpeed ) * sin(modelPosition.z * uWaterFrequency * uXzScale+ uTime * uZSpeed) - abs(cnoise(modelPosition.xz * uNoiseFrequency + uTime * uNoiseSpeed) * uNoiseScale);
   modelPosition.y = elevation * uDeepScale;
+
   vElevation = elevation;
   // 投影矩阵 * 视图矩阵 * 模型矩阵 * 4分量坐标
+
   gl_Position = projectionMatrix * viewMatrix * modelPosition;
 }
