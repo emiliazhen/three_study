@@ -3,9 +3,12 @@ import './index.scss'
 import * as THREE from 'three'
 // 导入轨道控制器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-
 import textureHDR from '@/assets/texture/bathtub.hdr'
 import { Water } from 'three/examples/jsm/objects/Water2.js'
+import water1Normal from '@/assets/texture/Water_1_M_Normal.jpg'
+import water2Normal from '@/assets/texture/Water_2_M_Normal.jpg'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import bathtubModel from '@/assets/model/bathtub.glb'
 
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 document.title = `${window.location.pathname.slice(1)} 浴缸`
@@ -26,18 +29,41 @@ rgbeLoader.loadAsync(textureHDR).then((texture) => {
   scene.environment = texture
 })
 
+// const water = new Water(planeGeometry, {
+//   color: '#ffffff',
+//   scale: 1,
+//   flowDirection: new THREE.Vector2(1, 1),
+//   textureWidth: 1024,
+//   textureHeight: 1024,
+//   normalMap0: textureLoader.load(water1Normal),
+//   normalMap1: textureLoader.load(water2Normal),
+// })
+// water.rotation.x = -Math.PI / 2
+// // 添加到场景中
+// scene.add(water)
+
 // 创建平面
-const planeGeometry = new THREE.PlaneGeometry(1, 1, 512, 512)
-const water = new Water(planeGeometry, {
-  color: '#ffffff',
-  scale: 1,
-  flowDirection: new THREE.Vector2(1, 1),
-  textureWidth: 1024,
-  textureHeight: 1024,
+const textureLoader = new THREE.TextureLoader()
+const gltfLoader = new GLTFLoader()
+gltfLoader.load(bathtubModel, (gltf) => {
+  const bathtub = gltf.scene.children[0] as THREE.Mesh
+  ;(bathtub.material as THREE.Material).side = THREE.DoubleSide
+  const waterGeometry = (gltf.scene.children[1] as THREE.Mesh).geometry as THREE.BufferGeometry
+  const water = new Water(waterGeometry, {
+    color: '#ffffff',
+    scale: 1,
+    flowDirection: new THREE.Vector2(1, 1),
+    textureWidth: 1024,
+    textureHeight: 1024,
+    normalMap0: textureLoader.load(water1Normal),
+    normalMap1: textureLoader.load(water2Normal),
+  })
+  water.position.y = -2
+  bathtub.position.y = -2
+  // 添加到场景中
+  scene.add(water)
+  scene.add(bathtub)
 })
-water.rotation.x = -Math.PI / 2
-// 添加到场景中
-scene.add(water)
 
 // 初始化渲染器
 const renderer = new THREE.WebGLRenderer()

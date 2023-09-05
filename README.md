@@ -1,4 +1,4 @@
-个人学习`Three.js`时写的`demo`，代码有详细注释，学习资料看 `Three.js` 官方文档或[我的个人笔记](https://emiliazhen.github.io/blog/canvas/threejs.html)  
+个人学习`Three.js`时写的`demo`，代码有详细注释，学习资料看 `Three.js` 官方文档或[我的个人笔记](https://emiliazhen.github.io/blog/canvas/threejs/threejs.html)  
 该项目为多页面项目，主要使用`webpack + TS + SCSS`来编写，学习的主要点有：
 
 - [x] 物体
@@ -47,6 +47,10 @@
 - [ ] AI 寻路避障自动导航
 - [ ] React-Three-Fiber 库
 - [ ] 项目效果提升
+
+## 演示
+
+[线上演示](https://emiliazhen.github.io/three_study/index/)
 
 ## run
 

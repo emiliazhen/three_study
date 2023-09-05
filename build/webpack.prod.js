@@ -14,7 +14,7 @@ const prodConfig = {
     path: path.resolve(__dirname, '../dist'),
     filename: 'js/[name]/[name]-bundle.[contenthash:8].js',
     chunkFilename: 'js/[name]/[name]-bundle.[contenthash:8].js', // splitChunks提取公共js时的命名规则
-    publicPath: '/',
+    publicPath: '/three_study/',
   },
   module: {
     rules: [

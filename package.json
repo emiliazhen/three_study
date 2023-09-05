@@ -2,7 +2,6 @@
   "name": "template_webpack_ts_sass",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config ./build/webpack.dev.js",

@@ -9,14 +9,14 @@ const devConfig = {
     path: path.resolve(__dirname, '../dist'),
     filename: 'js/[name]/[name]-bundle.js',
     chunkFilename: 'js/[name]/[name]-bundle.js',
-    publicPath: '/',
+    publicPath: '/three_study/',
   },
   devServer: {
     historyApiFallback: true,
     //不启动压缩
     compress: false,
     // host: '0.0.0.0',
-    open: ['/index'],
+    open: ['/three_study/index'],
     hot: true,
     port: 8081,
     proxy: {
@@ -41,6 +41,9 @@ const devConfig = {
       ],
     },
     static: './static',
+    devMiddleware: {
+      publicPath: '/three_study/',
+    },
   },
   module: {
     rules: [

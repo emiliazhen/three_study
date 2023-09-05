@@ -12,6 +12,11 @@ module.exports = {
     },
     extensions: ['.ts', 'tsx', '.js'],
   },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
   //这里可以配置一些对指定文件的处理
   //这里匹配后缀为ts或者tsx的文件
   //使用exclude来排除一些文件
