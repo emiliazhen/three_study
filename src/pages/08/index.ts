@@ -1,5 +1,4 @@
 import '@/assets/styles/index.scss'
-import './index.scss'
 import * as THREE from 'three'
 import particlesStar from '@/assets/texture/particles_star.png'
 // 导入轨道控制器

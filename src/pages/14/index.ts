@@ -1,5 +1,4 @@
 import '@/assets/styles/index.scss'
-import './index.scss'
 import * as THREE from 'three'
 // 导入轨道控制器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'

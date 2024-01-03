@@ -1,5 +1,4 @@
 import '@/assets/styles/index.scss'
-import './index.scss'
 import * as THREE from 'three'
 import gasp from 'gsap'
 import rawVertexShader from '@/assets/shader/lantern/vertex.glsl'

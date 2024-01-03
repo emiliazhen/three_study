@@ -1,5 +1,4 @@
 import '@/assets/styles/index.scss'
-import './index.scss'
 import * as THREE from 'three'
 import particlesSnow from '@/assets/texture/particles_snow.png'
 import particlesPoint from '@/assets/texture/particles_point.png'
