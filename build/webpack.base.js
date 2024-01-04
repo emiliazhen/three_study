@@ -94,7 +94,7 @@ module.exports = {
         type: 'asset/inline',
       },
       {
-        test: /\.(hdr|mp3|glb)$/,
+        test: /\.(hdr|mp3|glb|gltf)$/,
         exclude: /node_modules/,
         type: 'asset/resource',
       },

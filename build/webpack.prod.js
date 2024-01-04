@@ -5,7 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// 直接output.clean = true就行
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 
 const prodConfig = {
@@ -15,6 +17,7 @@ const prodConfig = {
     filename: 'js/[name]/[name]-bundle.[contenthash:8].js',
     chunkFilename: 'js/[name]/[name]-bundle.[contenthash:8].js', // splitChunks提取公共js时的命名规则
     publicPath: '/three_study/',
+    clean: true,
   },
   module: {
     rules: [
@@ -73,11 +76,20 @@ const prodConfig = {
       chunkFilename: 'css/[name]/[name]-bundle.[contenthash:8].css', // splitChunks提取公共css时的命名规则
     }),
     // new OptimizeCSSPlugin({
-    //   cssProcessorOptions: { safe: true }, // 压缩打包的css
+    //   cssProcessorOptions: { safe: true }, // 压缩打包的css webpack4.x
     // }),
     new CssMinimizerPlugin(),
     new WebpackManifestPlugin(), // 生成manifest.json
-    new CleanWebpackPlugin(), // 打包前先删除之前的dist目录
+    // 复制public资源
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../public'),
+          to: path.resolve(__dirname, '../dist/static'),
+        },
+      ],
+    }),
+    // new CleanWebpackPlugin(), // 打包前先删除之前的dist目录 webpack4.x
   ],
   optimization: {
     minimizer: [

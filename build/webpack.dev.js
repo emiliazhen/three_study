@@ -40,7 +40,10 @@ const devConfig = {
         },
       ],
     },
-    static: './static',
+    static: {
+      directory: path.resolve(__dirname, '../public'),
+      publicPath: '/three_study/static/',
+    },
     devMiddleware: {
       publicPath: '/three_study/',
     },
