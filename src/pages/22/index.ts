@@ -17,7 +17,7 @@ const scene = new THREE.Scene()
 // 创建相机
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 200)
 // 设置相机位置
-camera.position.set(0, 2, -10)
+camera.position.set(0, 5, -10)
 scene.add(camera)
 
 const clock = new THREE.Clock()
@@ -49,12 +49,14 @@ earthTipEl.innerHTML = '地球'
 const earthLabel = new CSS2DObject(earthTipEl)
 earthLabel.position.set(0, 1, 0)
 earth.add(earthLabel)
+
 const chinaTipEl = document.createElement('div')
 chinaTipEl.className = 'label-china'
 chinaTipEl.innerHTML = '中国'
 const chinaLabel = new CSS2DObject(chinaTipEl)
 chinaLabel.position.set(-0.2, 0.6, -0.9)
 earth.add(chinaLabel)
+
 const moonTipEl = document.createElement('div')
 moonTipEl.className = 'label'
 moonTipEl.innerHTML = '月球'
@@ -70,6 +72,9 @@ labelRenderer.domElement.style.top = '0px'
 labelRenderer.domElement.style.left = '0px'
 labelRenderer.domElement.style.zIndex = '10'
 
+// ! 射线检测
+const raycaster = new THREE.Raycaster()
+
 // 初始化渲染器
 const renderer = new THREE.WebGLRenderer()
 // 设置渲染尺寸
@@ -83,14 +88,30 @@ scene.add(dirLight)
 // 将webgl渲染的canvas内容添加到body
 document.body.appendChild(renderer.domElement)
 const controls = new OrbitControls(camera, labelRenderer.domElement)
-const axesHelper = new THREE.AxesHelper()
-scene.add(axesHelper)
 
 // 动画
 const renderFunction = () => {
   controls.update()
   const elapsed = clock.getElapsedTime()
   moon.position.set(Math.sin(elapsed) * 5, 0, Math.cos(elapsed) * 5)
+  const chinaPosition = chinaLabel.position.clone()
+  // 标签距离相机距离
+  const labelDistance = chinaPosition.distanceTo(camera.position)
+  // ! 向量（坐标）从世界空间投影到相机的标准化设备坐标（NDC）空间
+  chinaPosition.project(camera)
+  raycaster.setFromCamera(chinaPosition, camera)
+  const intersects = raycaster.intersectObjects(scene.children, true)
+  if (intersects.length === 0) {
+    chinaLabel.element.classList.add('visible')
+  } else {
+    // 第一个是最近的
+    const minDistance = intersects[0].distance
+    if (minDistance < labelDistance) {
+      chinaLabel.element.classList.remove('visible')
+    } else {
+      chinaLabel.element.classList.add('visible')
+    }
+  }
   renderer.render(scene, camera)
   labelRenderer.render(scene, camera)
   requestAnimationFrame(renderFunction)

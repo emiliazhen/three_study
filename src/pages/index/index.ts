@@ -24,6 +24,7 @@ const routerNameList = [
   '着色器加工材质',
   '效果合成与后期处理',
   'HTML混合3D渲染',
+  '曲线轨迹运动',
 ]
 routerNameList.forEach((routerName, index) => {
   const liElement = document.createElement('li')
